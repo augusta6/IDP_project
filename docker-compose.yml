@@ -1,30 +1,6 @@
 version: '3.9'
 
 services:
-  auth-service:
-    build: ./auth-service
-    container_name: auth-service
-    ports:
-      - "3001:3001"
-    env_file:
-      - ./auth-service/.env
-    depends_on:
-      - database-service
-    networks:
-      - backend
-
-  database-service:
-    build: ./database-service
-    container_name: database-service
-    ports:
-      - "3004:3004"
-    env_file:
-      - ./database-service/.env
-    depends_on:
-      - mysql
-    networks:
-      - backend
-
   mysql:
     image: mysql:8
     container_name: mysql
@@ -46,6 +22,42 @@ services:
     restart: always
     ports:
       - "8080:8080"
+    networks:
+      - backend
+
+  database-service:
+    build: ./database-service
+    container_name: database-service
+    ports:
+      - "3004:3004"
+    env_file:
+      - ./database-service/.env
+    depends_on:
+      - mysql
+    networks:
+      - backend
+
+  auth-service:
+    build: ./auth-service
+    container_name: auth-service
+    ports:
+      - "3001:3001"
+    env_file:
+      - ./auth-service/.env
+    depends_on:
+      - database-service
+    networks:
+      - backend
+
+  booking-service:
+    build: ./booking-service
+    container_name: booking-service
+    ports:
+      - "3002:3002"
+    env_file:
+      - ./booking-service/.env
+    depends_on:
+      - database-service
     networks:
       - backend
 
