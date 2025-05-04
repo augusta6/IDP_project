@@ -26,7 +26,7 @@ services:
       - backend
 
   database-service:
-    build: ./database-service
+    image: august3/database-service
     container_name: database-service
     ports:
       - "3004:3004"
@@ -38,7 +38,7 @@ services:
       - backend
 
   auth-service:
-    build: ./auth-service
+    image: august3/auth-service
     container_name: auth-service
     ports:
       - "3001:3001"
@@ -50,7 +50,7 @@ services:
       - backend
 
   booking-service:
-    build: ./booking-service
+    image: august3/booking-service
     container_name: booking-service
     ports:
       - "3002:3002"
@@ -62,7 +62,7 @@ services:
       - backend
 
   notification-service:
-    build: ./notification-service
+    image: august3/notification-service
     container_name: notification-service
     ports:
       - "3003:3003"
@@ -72,6 +72,7 @@ services:
       - database-service
     networks:
       - backend
+
   kong-database:
     image: postgres:13
     container_name: kong-database
@@ -157,7 +158,18 @@ services:
 
 
 
-
+  portainer:
+    image: portainer/portainer-ce
+    container_name: portainer
+    restart: always
+    ports:
+      - "9000:9000"       # HTTPS UI (poate fi și 9000 dacă preferi HTTP)
+      # - "8000:8000"       # Optional: edge agent
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    networks:
+      - backend
 
 
 
@@ -167,3 +179,4 @@ networks:
 volumes:
   mysql_data:
   kong_data:
+  portainer_data:
