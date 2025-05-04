@@ -118,4 +118,32 @@ const getAvailableRooms = async (req, res) => {
   }
 };
 
-module.exports = { getUserByEmail, createUser, createRoom, createBooking, getBookings, getAvailableRooms };
+const getUpcomingBookings = async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      `SELECT b.id, b.booking_time, b.user_id, u.email, r.name AS room_name
+       FROM bookings b
+       JOIN users u ON b.user_id = u.id
+       JOIN escape_rooms r ON b.room_id = r.id
+       WHERE b.booking_time > NOW() AND b.notified = FALSE
+       ORDER BY b.booking_time ASC`
+    );
+    res.json(rows);
+  } catch (err) {
+    console.error("getUpcomingBookings error:", err.message);
+    res.status(500).json({ error: 'Database error' });
+  }
+};
+
+const markBookingAsNotified = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await pool.query(`UPDATE bookings SET notified = TRUE WHERE id = ?`, [id]);
+    res.json({ message: "Marked as notified" });
+  } catch (err) {
+    console.error("markBookingAsNotified error:", err.message);
+    res.status(500).json({ error: 'Database error' });
+  }
+};
+
+module.exports = { getUserByEmail, createUser, createRoom, createBooking, getBookings, getAvailableRooms, getUpcomingBookings, markBookingAsNotified };

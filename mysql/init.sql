@@ -28,3 +28,6 @@ CREATE TABLE IF NOT EXISTS bookings (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   FOREIGN KEY (room_id) REFERENCES escape_rooms(id) ON DELETE CASCADE
 );
+
+-- În init.sql din mysql:
+ALTER TABLE bookings ADD COLUMN notified BOOLEAN DEFAULT FALSE;

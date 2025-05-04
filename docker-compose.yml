@@ -61,6 +61,19 @@ services:
     networks:
       - backend
 
+  notification-service:
+    build: ./notification-service
+    container_name: notification-service
+    ports:
+      - "3003:3003"
+    env_file:
+      - ./notification-service/.env
+    depends_on:
+      - database-service
+    networks:
+      - backend
+
+
 networks:
   backend:
 

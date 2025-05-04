@@ -5,7 +5,9 @@ const {
   createBooking,
   getBookings,
   getAvailableRooms,
-  createRoom
+  createRoom,
+  getUpcomingBookings,
+  markBookingAsNotified,
 } = require('./controller');
 
 const router = express.Router();
@@ -21,5 +23,9 @@ router.get('/bookings', getBookings);
 // ROOMS
 router.get('/rooms/available', getAvailableRooms);
 router.post('/rooms', createRoom);
+
+// BOOKINGS NOTIFICATIONS
+router.get('/bookings/upcoming', getUpcomingBookings);
+router.post('/bookings/:id/notified', markBookingAsNotified);
 
 module.exports = router;
