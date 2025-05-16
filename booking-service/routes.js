@@ -5,12 +5,12 @@ const {
   handleGetAvailableRooms
 } = require('./controller');
 
-const requireAuth = require('./middleware/requireAuth');
+const verifyToken = require('./middleware/verifyToken');
 const router = express.Router();
 
 
-router.post('/bookings', requireAuth, handleCreateBooking);
-router.get('/bookings', requireAuth, handleGetBookings);
+router.post('/bookings', verifyToken, handleCreateBooking);
+router.get('/bookings', verifyToken, handleGetBookings);
 router.get('/rooms/available', handleGetAvailableRooms);
 
 module.exports = router;
