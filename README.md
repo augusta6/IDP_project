@@ -17,6 +17,10 @@ curl -X POST http://localhost:3001/api/auth/register \
 -H "Content-Type: application/json" \
 -d '{"email": "test@email.com", "password": "parola123"}'
 
+
+CU KONG:
+curl -X POST http://localhost:8000/api/auth/register   -H "Content-Type: application/json"   -d '{"email":"test@email.com", "password":"parola123"}'
+
 Creare Camera:
 curl -X POST http://localhost:3004/api/rooms \
 -H "Content-Type: application/json" \
@@ -28,6 +32,19 @@ curl -X POST http://localhost:3004/api/rooms \
   "duration_minutes": 60
 }'
 
+
+CU KONG:
+
+
+
+
+REZERVARE CAMERA
+CU KONG:
+curl -X POST http://localhost:8000/api/bookings   -H "Content-Type: application/json"   -d '{
+    "user_id": 1,
+    "room_id": 1,
+    "booking_time": "2025-04-15 12:00:00"
+  }'
 
 curl -X POST http://localhost:3004/api/bookings \
 -H "Content-Type: application/json" \
