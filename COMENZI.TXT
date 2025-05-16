@@ -1,0 +1,17 @@
+./kong-setup.sh
+
+
+curl -X POST http://localhost:8000/api/auth/register   -H "Content-Type: application/json"   -d '{"email":"test@email.com", "password":"parola123"}'
+
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0QGVtYWlsLmNvbSIsImlhdCI6MTc0NzQyMzczNiwiZXhwIjoxNzQ3NDI3MzM2fQ.Wl-zKjuEdTD8IdWgOJ-SXtloipZq4pSbSNP-arz0ssM
+
+
+curl -X POST http://localhost:8000/api/booking/bookings \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0QGVtYWlsLmNvbSIsImlhdCI6MTc0NzQyMzczNiwiZXhwIjoxNzQ3NDI3MzM2fQ.Wl-zKjuEdTD8IdWgOJ-SXtloipZq4pSbSNP-arz0ssM" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "user_id": 1,
+    "room_id": 1,
+    "booking_time": "2025-04-15 12:00:00"
+  }'

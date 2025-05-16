@@ -27,6 +27,7 @@ const registerUser = async (req, res) => {
   
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
+
   try {
     const user = await findUserByEmail(email);
     if (!user) return res.status(404).json({ error: 'User not found' });
@@ -34,11 +35,25 @@ const loginUser = async (req, res) => {
     const valid = await bcrypt.compare(password, user.password);
     if (!valid) return res.status(401).json({ error: 'Invalid credentials' });
 
-    const token = generateToken({ id: user.id, email: user.email });
-    res.json({ token });
+    // Salvează datele în sesiune
+    req.session.user = {
+      id: user.id,
+      email: user.email
+    };
+
+    res.json({ message: 'Login successful', user: req.session.user });
   } catch (err) {
     res.status(500).json({ error: 'Login failed' });
   }
 };
 
-module.exports = { registerUser, loginUser };
+const logoutUser = (req, res) => {
+  req.session.destroy(err => {
+    if (err) return res.status(500).json({ error: 'Could not logout' });
+    res.clearCookie('connect.sid'); // cookie implicit
+    res.json({ message: 'Logout successful' });
+  });
+};
+
+
+module.exports = { registerUser, loginUser, logoutUser };
