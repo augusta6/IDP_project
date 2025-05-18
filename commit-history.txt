@@ -1,0 +1,15 @@
+6296347 | 2025-05-18 | DONE TOKEN
+f39b409 | 2025-05-17 | test2 token
+b0ccd64 | 2025-05-17 | test token
+ed1798f | 2025-05-16 | try token
+2c126be | 2025-05-16 | functionalitati done
+accc4c2 | 2025-05-04 | Adaugă workflow CI/CD pentru Docker
+84d9c35 | 2025-05-04 | portainer swarm
+7a6f1e6 | 2025-05-04 | grafana prom
+2cbac17 | 2025-05-04 | Kong integrated
+3e6f1ce | 2025-05-04 | Notification-service done
+4881049 | 2025-04-15 | booking done
+d3f28ab | 2025-04-15 | auth done
+16f95bc | 2025-04-12 | todos
+b66d509 | 2025-04-12 | db init
+6305eb6 | 2025-04-12 | Initial commit
