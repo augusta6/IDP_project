@@ -26,6 +26,7 @@ const registerUser = async (req, res) => {
 };
   
 const loginUser = async (req, res) => {
+  console.log("LLOGIN FOLOSIT");
   const { email, password } = req.body;
   try {
     const user = await findUserByEmail(email);
@@ -42,12 +43,9 @@ const loginUser = async (req, res) => {
 };
 
 const logoutUser = (req, res) => {
-  req.session.destroy(err => {
-    if (err) return res.status(500).json({ error: 'Could not logout' });
-    res.clearCookie('connect.sid'); // cookie implicit
-    res.json({ message: 'Logout successful' });
-  });
+  res.json({ message: 'Logout successful. Please delete your token on the client.' });
 };
+
 
 
 module.exports = { registerUser, loginUser, logoutUser };

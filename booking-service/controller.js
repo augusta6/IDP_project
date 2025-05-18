@@ -6,7 +6,12 @@ const {
 
 const handleCreateBooking = async (req, res) => {
   try {
-    const data = await createBooking(req.body);
+    const bookingPayload = {
+      ...req.body,
+      user_id: req.user.id  // ia userul din token verificat
+    };
+    const data = await createBooking(bookingPayload);
+
     res.status(201).json(data);
   } catch (err) {
     console.error("Booking create error:", err.message);

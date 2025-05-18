@@ -3,12 +3,12 @@ KONG_API="http://localhost:8001"
 
 echo "Reînregistrare servicii și rute în Kong..."
 
-echo "🧹 Ștergere rute existente..."
+echo "Ștergere rute existente..."
 for route in $(curl -s $KONG_API/routes | jq -r '.data[].id'); do
   curl -s -X DELETE $KONG_API/routes/$route
 done
 
-echo "🧹 Ștergere servicii existente..."
+echo "Ștergere servicii existente..."
 for svc in auth-service booking-service notification-service database-service; do
   curl -s -X DELETE $KONG_API/services/$svc
 done
